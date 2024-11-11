@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  input, textarea {
+    @apply border-gray-300 focus:border-blue-500 focus:ring-blue-500;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes firework {
+  0% {
+    transform: translate(var(--x), var(--initialY));
+    width: var(--initialSize);
+    opacity: 1;
+  }
+  50% {
+    width: 0.5vmin;
+    opacity: 1;
+  }
+  100% {
+    width: var(--finalSize);
+    opacity: 0;
+  }
+}
+
+.firework,
+.firework::before,
+.firework::after {
+  --initialSize: 0.5vmin;
+  --finalSize: 45vmin;
+  --particleSize: 0.2vmin;
+  --color1: yellow;
+  --color2: khaki;
+  --color3: white;
+  --color4: lime;
+  --color5: gold;
+  --color6: mediumseagreen;
+  --y: -30vmin;
+  --x: -50%;
+  --initialY: 60vmin;
+  content: "";
+  animation: firework 2s infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, var(--y));
+  width: var(--initialSize);
+  aspect-ratio: 1;
+  background: 
+    radial-gradient(circle, var(--color1) var(--particleSize), transparent 0) 0% 0%,
+    radial-gradient(circle, var(--color2) var(--particleSize), transparent 0) 100% 0%,
+    radial-gradient(circle, var(--color3) var(--particleSize), transparent 0) 100% 100%,
+    radial-gradient(circle, var(--color4) var(--particleSize), transparent 0) 0% 100%;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.firework::before {
+  --x: -50%;
+  --y: -50%;
+  --initialY: -50%;
+  --color2: mediumseagreen;
+  --color3: gold;
+  --color4: white;
+  content: "";
+  position: absolute;
+  transform: translate(-50%, var(--y));
+}
+
+.firework::after {
+  --x: -50%;
+  --y: -50%;
+  --initialY: -50%;
+  --color1: lime;
+  --color2: gold;
+  --color3: mediumseagreen;
+  content: "";
+  position: absolute;
+  transform: translate(-50%, var(--y));
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Responsive optimizations */
+@media (max-width: 640px) {
+  .task-grid {
+    @apply grid-cols-1;
+  }
+  
+  .calendar-cell {
+    @apply h-16;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .task-grid {
+    @apply grid-cols-2;
+  }
+  
+  .calendar-cell {
+    @apply h-20;
+  }
+}
